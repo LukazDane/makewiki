@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from wiki.models import Page
-from django.views import DetailView, ListView
+from django.views.generic import DetailView, ListView
 # Create your views here.
 
 
@@ -13,9 +13,9 @@ class PageList(ListView):
     """
     model = Page
 
-    def get(self, request, username, slug):
-        """ Returns a list of wiki pages. """
-        pass
+    def get(self, request):
+
+        return render('list.html')
 
 
 class PageDetailView(DetailView):
@@ -39,7 +39,7 @@ class PageDetailView(DetailView):
 
     def get(self, request, slug):
         """ Returns a specific of wiki page by slug. """
-        pass
+        return render('page.html')
 
     def post(self, request, slug):
         pass
