@@ -1,0 +1,10 @@
+{% extends 'base.html' %} {% block body %}
+<h1>Hello this is list</h1>
+<ul>
+  {% for page in pages %}
+  <li>
+    <a href="/{{ page.slug }}">{{ page.title }}</a>
+  </li>
+  {% empty %} Sorry no pages {% endfor %}
+</ul>
+{% endblock %}

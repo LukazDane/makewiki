@@ -1,4 +1,7 @@
 from django.urls import path
+from django.views.generic import TemplateView, ListView, DeleteView
+from .views import PageListView, PageDetailView
+from . import views
 
 """
   CHALLENGES:
@@ -12,6 +15,7 @@ from django.urls import path
   """
 
 urlpatterns = [
-    # path('REPLACE_ME_WITH_ROOT_ROUTE', REPLACE_ME_WITH_VIEW.as_view(), name='wiki-list-page'),
-    # path('REPLACE_ME_WITH_SLUG', REPLACE_ME_WITH_VIEW.as_view(), name='wiki-details-page'),
+    path('', PageListView.as_view(), name='wiki-list-page'),
+    path('<str:slug>/', PageDetailView.as_view(), name='wiki-details-page'),
+    # path('<slug>/', PageDetailView.as_view(), name='wiki-details-page'),
 ]

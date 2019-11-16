@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from wiki.models import Page
 from django.views.generic import DetailView, ListView
+from django.http import HttpResponse
 # Create your views here.
 
 
-class PageList(ListView):
+class PageListView(ListView):
     """
     CHALLENGES:
       1. On GET, display a homepage that shows all Pages in your wiki.
@@ -14,8 +15,11 @@ class PageList(ListView):
     model = Page
 
     def get(self, request):
-
-        return render('list.html')
+        """ GET a list of Pages. """
+        pages = self.get_queryset().all()
+        return render(request, 'list.html', {
+            'pages': pages
+        })
 
 
 class PageDetailView(DetailView):
@@ -38,8 +42,11 @@ class PageDetailView(DetailView):
     model = Page
 
     def get(self, request, slug):
-        """ Returns a specific of wiki page by slug. """
-        return render('page.html')
+        """ Returns a specific wiki page by slug. """
+        page = self.get_queryset().get(slug__iexact=slug)
+        return render(request, 'page.html', {
+            'page': page
+        })
 
     def post(self, request, slug):
         pass
